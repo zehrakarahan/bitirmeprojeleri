@@ -1,0 +1,109 @@
+﻿@model List<BitirmeProjem.UI.Models.SepetUrun>
+@{
+
+
+}
+<table class="table table-bordered table-responsive cart_summary">
+    <thead>
+        <tr>
+            <th class="cart_product">Ürün Resimleri</th>
+            <th>Ürün Bilgileri</th>
+            <th>Ürün Fiyatları</th>
+            <th>Ürün Adetleri</th>
+            <th>Total Fiyatımız</th>
+            <th class="action"><i class="fa fa-trash-o"></i></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+           foreach (var item in Model)
+            {
+                <tr>
+                    <td class="cart_product">
+                        <a href="#"><img src="~/Content/images/Urunler/@item.UrunResim" alt="Product"></a>
+                    </td>
+                    <td class="cart_description">
+                        <p class="product-name"><a href="#">@item.UrunAdi </a></p>
+                        <small class="cart_ref">SKU : #123654999</small><br>
+                    </td>
+                    <td class="price"><span>@item.Fiyat TL</span></td>
+                    <td class="qty">
+                        @item.Adet
+                    </td>
+                    <td class="price">
+                        <span>@item.Fiyat TL</span>
+                    </td>
+                    <td class="action">
+                        <a href="#">Delete item</a>
+                    </td>
+                </tr>
+            }
+        }
+
+    </tbody>
+    <tfoot>
+
+        <tr>
+            <td colspan="2" rowspan="2"></td>
+            <td colspan="3">Total Fiyatlar Toplamı (tax incl.)</td>
+            <td colspan="2"><span id="toplam1">@ViewBag.Tutardegeri</span> TL</td>
+        </tr>
+        <tr>
+            <td colspan="3"><strong>Toplam</strong></td>
+            <td colspan="2"><strong><span id="toplam2">@ViewBag.Tutardegeri</span> TL</strong></td>
+        </tr>
+        <tr>
+            <td colspan="3"><strong></strong></td>
+            <td colspan="2"><input id="txtKupon" type="text" class="form-control" placeholder="İndirim Kuponu" /></td>
+            <td colspan="2"><button class="btn btn-danger" id="btnUygula">Uygula</button></td>
+        </tr>
+    </tfoot>
+</table>
+
+@if (Session["Uye"] == null)
+{
+
+    //<button><a href="/Uye/UyeOl" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+    //<button type="submit" class="btn btn-primary"><a href="/Uye/UyeOl">Yorum Yap</a></button>
+    <button class="btn btn-danger" id="btnUygula" style="margin-left:1200px"><a href="/Uye/UyeOl"><font color="white">Siparişi Tamamla</font></a></button>
+}
+else
+{
+    <button class="btn btn-danger" id="btnUygula" style="margin-left:1200px"><a href="/Siparis/AdresList"><font color="white">Siparişi Tamamla</font></a></button>
+}
+
+@section scripts{
+    <script>
+        var toplam = 0;
+        @if (ViewBag.Tutardegeri!=null)
+{
+            <text>toplam=@ViewBag.Tutardegeri;</text>
+}
+        $("#btnUygula").click(function () {
+            var kupon = $("#txtKupon").val();
+            $.ajax({
+                url: '/Sepet/Kupon_kismi/',
+                data: { kupon: kupon },
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    if (data != "0") {
+                        var intData = parseInt(data, 10);
+                        var indirim = toplam * intData / 100;
+                        toplam -= indirim;
+                        $("#toplam1").html(toplam);
+                        $("#toplam2").html(toplam);
+                        $("#btnUygula").attr("disabled", "disabled");
+                        $("#txtKupon").attr("disabled", "disabled");
+                    }
+                    else {
+                        alert("Geçersiz kupon kodu");
+                    }
+                }
+            })
+
+
+        })
+    </script>
+}

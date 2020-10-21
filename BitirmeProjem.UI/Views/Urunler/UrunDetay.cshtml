@@ -1,0 +1,255 @@
+﻿@model BitirmeProjem.Entities.Concrete.Urunler
+@{
+    var yorumlar = (List<BitirmeProjem.Entities.Concrete.Yorumlar>)ViewBag.Yorumlar;
+}
+<div class="columns-container">
+    <div class="container" id="columns">
+
+        <!-- row -->
+        <div class="row">
+            <!-- Left colunm -->
+            <div class="column col-xs-12 col-sm-3" id="left_column">
+                <!-- block category -->
+                <div class="block left-module">
+                    <p class="title_block">Kategoriler</p>
+                    <div class="block_content">
+                        <!-- layered -->
+                        <div class="layered layered-category">
+                            <div class="layered-content">
+                                <ul class="tree-menu">
+                                    <li class="active">
+                                        <span></span><a href="#">Tops</a>
+                                        <ul>
+                                            <li><span></span><a href="#">T-shirts</a></li>
+                                            <li><span></span><a href="#">Dresses</a></li>
+                                            <li><span></span><a href="#">Casual</a></li>
+                                            <li><span></span><a href="#">Evening</a></li>
+                                            <li><span></span><a href="#">Summer</a></li>
+                                            <li><span></span><a href="#">Bags & Shoes</a></li>
+                                            <li><span></span><a href="#"><span></span>Blouses</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><span></span><a href="#">T-shirts</a></li>
+                                    <li><span></span><a href="#">Dresses</a></li>
+                                    <li><span></span><a href="#">Jackets and coats </a></li>
+                                    <li><span></span><a href="#">Knitted</a></li>
+                                    <li><span></span><a href="#">Pants</a></li>
+                                    <li><span></span><a href="#">Bags & Shoes</a></li>
+                                    <li><span></span><a href="#">Best selling</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- ./layered -->
+                    </div>
+                </div>
+                <!-- ./block category  -->
+            </div>
+            <!-- ./left colunm -->
+            <!-- Center colunm-->
+            <div class="center_column col-xs-12 col-sm-9" id="center_column">
+                <!-- Product -->
+                <div id="product">
+                    <div class="primary-box row">
+                        <div class="pb-left-column col-xs-12 col-sm-6">
+                            <!-- product-imge-->
+                            <div class="product-image">
+                                <div class="product-full">
+                                    <img id="product-zoom" src='/Content/images/Urunler/@Model.KapakResmi' data-zoom-image="/Content/images/Urunler/@Model.KapakResmi" />
+                                </div>
+                            </div>
+                            <!-- product-imge-->
+                        </div>
+                        <div class="pb-right-column col-xs-12 col-sm-6">
+                            <h1 class="product-name">@Model.Adi</h1>
+                            <div class="product-comments">
+                                <div class="product-star">
+                                    @for (int i = 0; i < Model.Yildiz; i++)
+                                    {
+                                        <i class="fa fa-star"></i>
+                                    }
+                                </div>
+                            </div>
+                            <div class="product-price-group">
+                                <span class="price">@Model.Fiyat TL</span>
+
+                            </div>
+                            <div class="info-orther">
+                                <p>Stok Durumu: <span class="in-stock">@Model.Stok</span></p>
+                                <p>Urun Bilgisi:Yeni Ürün</p>
+                            </div>
+                            @*Sepete EKLEME KISMI*@
+                            <div class="form-action">
+                                <div class="button-group">
+                                    <a class="btn-add-cart" href="javascirpt;;"  >Sepete Ekle</a>
+
+                                </div>
+
+                            </div>
+                            <div class="form-share">
+                                <div class="sendtofriend-print">
+                                    <a href="javascript:print();"><i class="fa fa-print"></i> Yazdır</a>
+                                </div>
+                                <div class="network-share">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- tab product -->
+                    <div class="product-tab">
+                        <ul class="nav-tab">
+                            <li class="active">
+                                <a aria-expanded="false" data-toggle="tab" href="#urunDetay">Ürün Açıklaması</a>
+                            </li>
+                            <li>
+                                <a aria-expanded="true" data-toggle="tab" href="#yorumlar">Yorumlar</a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#yorumYap">Yorum Yap</a>
+                            </li>
+
+                        </ul>
+                        <div class="tab-container">
+                            <div id="urunDetay" class="tab-panel active">
+                                @Html.Raw(Model.Detay)
+                            </div>
+
+                            <div id="yorumlar" class="tab-panel">
+                                <div class="product-comments-block-tab">
+                                    @foreach (var yorum in yorumlar)
+                                    {
+                                        <div class="comment row">
+                                            <div class="col-sm-3 author">
+                                                <div class="grade">
+
+                                                    <span class="reviewRating">
+                                                        @for (int i = 0; i < yorum.Puan; i++)
+                                                        {
+                                                            <i class="fa fa-star"></i>
+                                                        }
+                                                     
+                                                    </span>
+                                                </div>
+                                                <div class="info-author">
+                                                    <span><strong>@yorum.Uyeler.Adi @yorum.Uyeler.Soyadi</strong></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-9 commnet-dettail">
+                                                @yorum.Yorum
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+
+                            </div>
+                            <div id="yorumYap" class="tab-panel">
+                                @if (Session["Uye"] == null)
+                                {
+
+                                    //<button><a href="/Uye/UyeOl" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+                                    <button type="submit"  class="btn btn-primary"><a href="/Uye/UyeOl">Yorum Yap</a></button>
+                                }
+                                else
+                                {
+
+                                    <div class="well">
+                                        <form role="form">
+                                            <input type="hidden" id="puan" />
+                                            <div class="form-group">
+                                                <label>Puanınız</label>
+                                                <ul id='stars'>
+                                                    <li class='star' data-value='1'>
+                                                        <i class='fa fa-star fa-fw'></i>
+                                                    </li>
+                                                    <li class='star' data-value='2'>
+                                                        <i class='fa fa-star fa-fw'></i>
+                                                    </li>
+                                                    <li class='star' data-value='3'>
+                                                        <i class='fa fa-star fa-fw'></i>
+                                                    </li>
+                                                    <li class='star' data-value='4'>
+                                                        <i class='fa fa-star fa-fw'></i>
+                                                    </li>
+                                                    <li class='star' data-value='5'>
+                                                        <i class='fa fa-star fa-fw'></i>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Yorumunuz</label>
+                                                <textarea id="yorum" typeof="text" class="form-control" rows="3"></textarea>
+                                            </div>
+                                            <button type="submit" id="gonder" class="btn btn-primary">Yorum Yap</button>
+                                        </form>
+                                    </div>
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Product -->
+            </div>
+            <!-- ./ Center colunm -->
+        </div>
+        <!-- ./row-->
+    </div>
+</div>
+@section scripts{
+<script>
+        $(document).ready(function () {
+
+            $('#stars li').on('mouseover', function () {
+                var onStar = parseInt($(this).data('value'), 10);
+
+                $(this).parent().children('li.star').each(function (e) {
+                    if (e < onStar) {
+                        $(this).addClass('hover');
+                    }
+                    else {
+                        $(this).removeClass('hover');
+                    }
+                });
+
+            }).on('mouseout', function () {
+                $(this).parent().children('li.star').each(function (e) {
+                    $(this).removeClass('hover');
+                });
+            });
+
+
+            $('#stars li').on('click', function () {
+                var onStar = parseInt($(this).data('value'), 10);
+                var stars = $(this).parent().children('li.star');
+
+                for (i = 0; i < stars.length; i++) {
+                    $(stars[i]).removeClass('selected');
+                }
+
+                for (i = 0; i < onStar; i++) {
+                    $(stars[i]).addClass('selected');
+                }
+                var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
+                $("#puan").val(ratingValue);
+            });
+        });
+</script>
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $("#gonder").click(function(){
+            var yorumunuz=$("#yorum").val();
+            $.ajax({
+                url:'/Urunler/YorumYap/',
+                data:{yorum:yorumunuz,urunid:@Model.ID,puan:$("#puan").val()},
+                type:'POST',
+                dataType:'json',
+                success:function(data){
+                    alert("Basarili yorum"+yorumunuz);}
+            });
+            return false;
+        });
+    })
+</script>
+}

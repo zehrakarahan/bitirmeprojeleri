@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewBag.Title = "Yorumlar";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@{
+    var list = (List<BitirmeProjem.Entities.Concrete.Yorumlar>)ViewBag.List;
+
+}
+
+
+<div class="m-grid__item m-grid__item--fluid m-wrapper">
+    <div class="m-content">
+        <div class="m-portlet m-portlet--mobile">
+            <div class="m-portlet__head">
+                <div class="m-portlet__head-caption">
+                    <div class="m-portlet__head-title">
+                        <h3 class="m-portlet__head-text">
+                            Ürün Yorumları
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="m-portlet__body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <td>Üye Adı</td>
+                            <td>Ürün Adı</td>
+                            <td>Puan</td>
+                            <td>Onay</td>
+                            <td>İşlemler</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (list != null)
+                        {
+                            foreach (var item in list)
+                            {
+                                <tr>
+                                    <td>@item.Uyeler.Adi @item.Uyeler.Soyadi</td>
+                                    <td>@item.Urunler.Adi </td>
+                                    <td>@item.Puan</td>
+                                    <td>@item.Onay</td>
+                                    <td>
+                                        <a href="@Url.Action("Duzenle",new {id=item.ID})" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Düzenle">
+                                            <i class="la la-edit"></i>
+                                        </a>
+                                        <button class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill btn-confirm btn-delete" data-title="Emin misiniz?" data-toggle="confirmation" data-id="@item.ID">
+                                            <i class="la la-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.AntiForgeryToken()
+
+@section scripts{
+    <script src="/Areas/Admin/Content/DeleteForm.js"></script>
+    <script>
+
+        function ended(result) {
+            location.reload();
+        }
+
+        $("body").on("click", "button.btn-delete", function () {
+            var dataID = $(this).attr('data-id');
+            swal({
+                title: 'Silinsin mi?',
+                text: "Kaydı silmek istediğinizden emin misiniz!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Evet'
+            }).then(function (result) {
+                if (result.value) {
+                    deleteRecord(dataID);
+                }
+
+            });
+        });
+        function deleteRecord(id) {
+            var token = $('input[name="__RequestVerificationToken"]').val();
+            var param = { id: id, url: '@Url.Action("Delete")', token: token, succFunction: ended };
+            deleteItem(param);
+        }
+    </script>
+}

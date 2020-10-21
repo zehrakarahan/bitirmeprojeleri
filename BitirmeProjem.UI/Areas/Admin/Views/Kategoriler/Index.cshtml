@@ -1,0 +1,147 @@
+﻿
+@{
+    ViewBag.Title = "Kategoriler";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="m-grid__item m-grid__item--fluid m-wrapper">
+    <!-- BEGIN: Subheader -->
+    <div class="m-subheader ">
+        <div class="d-flex align-items-center">
+            <div class="mr-auto">
+                <h3 class="m-subheader__title m-subheader__title--separator">
+                    Kategoriler
+                </h3>
+            </div>
+
+        </div>
+    </div>
+    <!-- END: Subheader -->
+    <div class="m-content">
+        <div class="m-portlet">
+            <div class="m-portlet__head">
+                <div class="m-portlet__head-caption">
+                    <div class="m-portlet__head-title">
+                        <h3 class="m-portlet__head-text">
+                            Kategori Yönetimi
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="m-portlet__body">
+                <div id="kategoriler" class="tree-demo"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@Html.AntiForgeryToken()
+
+@section scripts{
+    <script>
+        $(function () {
+            $.ajax({
+                async: true,
+                type: "GET",
+                url: "@Url.Action("KategorileriGetir")",
+                dataType: "json",
+                success: function (json) {
+                    createJSTree(json);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                }
+            });            
+        });
+        function createJSTree(jsondata) {            
+            $('#kategoriler').jstree({
+                'core': {
+                    "check_callback": true,
+                    'data': jsondata
+                },
+                "types": {
+                    "default": {
+                        "icon": "fa fa-folder m--font-brand"
+                    },
+                    "file": {
+                        "icon": "fa fa-file  m--font-brand"
+                    }
+                },
+                "state": { "key": "demo2" },
+                "plugins": ["contextmenu", "state", "types"], contextmenu: { items: customMenu }
+            }).on('create_node.jstree', function (e, data) {
+                console.log(data);
+                $.ajax({
+                    type: "POST",
+                    data:{adi:data.node.text,ustID:data.parent},
+                    url: "@Url.Action("KategoriEkle")",
+                    dataType: "json",
+                    success: function (json) {
+                        console.log(json);
+                        $("#kategoriler").jstree(true).set_id(data.node, json);
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                    }
+                });           
+            }).on('rename_node.jstree', function (e, data) {
+                console.log(data);
+                $.ajax({
+                    type: "POST",
+                    data: { adi: data.node.text, id: data.node.id },
+                    url: "@Url.Action("KategoriAdiDegistir")",
+                    dataType: "json",
+                    success: function (json) {
+                        console.log(json);
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                    }
+                });           
+            }).on('delete_node.jstree', function (e, data) {
+                $.ajax({
+                    async: true,
+                    type: "POST",
+                    data:{id:data.node.id},
+                    url: "@Url.Action("KategoriSil")",
+                    dataType: "json",
+                    success: function (json) {
+                        console.log(json);
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                    }
+                });           
+            });
+        }
+        function customMenu($node) {
+            var tree = $("#kategoriler").jstree(true);
+            return {
+                "Create": {
+                    "separator_before": false,
+                    "separator_after": false,
+                    "label": "Yeni Ekle",
+                    "action": function (obj) {
+                        $node = tree.create_node($node);
+                        tree.edit($node);
+                    }
+                },
+                "Rename": {
+                    "separator_before": false,
+                    "separator_after": false,
+                    "label": "Değiştir",
+                    "action": function (obj) {
+                        tree.edit($node);
+                    }
+                },
+                "Remove": {
+                    "separator_before": false,
+                    "separator_after": false,
+                    "label": "Sil",
+                    "action": function (obj) {
+                        tree.delete_node($node);
+                    }
+                }
+            };
+        }
+    </script>
+}

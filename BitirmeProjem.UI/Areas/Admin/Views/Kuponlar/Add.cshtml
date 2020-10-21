@@ -1,0 +1,106 @@
+﻿@model BitirmeProjem.UI.Areas.Admin.Models.VM.KuponlarVM
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="m-grid__item m-grid__item--fluid m-wrapper">
+
+    <div class="m-content">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <!--begin::Portlet-->
+                <div class="m-portlet">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon m--hide">
+                                    <i class="la la-gear"></i>
+                                </span>
+                                <h3 class="m-portlet__head-text">
+                                    İndirim Kuponu Ekle / Düzenle
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="m-portlet__head-tools">
+                            <ul class="m-portlet__nav">
+                                <li class="m-portlet__nav-item">
+                                    <a href="@Url.Action("Index")" class="m-portlet__nav-link m-portlet__nav-link--icon">
+                                        <i class="la la-long-arrow-left"></i>Listeye Dön
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--begin::Form-->
+                    @using (Html.BeginForm("Add", "Kuponlar", FormMethod.Post, new { @class = "m-form m-form--fit m-form--label-align-right", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(x => x.ID)
+                        <div class="m-portlet__body">
+                            <div class="m-form__section m-form__section--first">
+                                <div class="form-group m-form__group row">
+                                    <div class="col-md-6">
+                                        <label>Kupon Kodu</label>
+                                        @Html.TextBoxFor(x => x.Kodu, new {@class = "form-control m-input"})
+                                        <div>
+                                            @Html.ValidationMessageFor(x => x.Kodu, null, new {@class = "form-control-feedback"})
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>İndirim Oranı (%)</label>
+                                        @Html.TextBoxFor(x => x.Oran, new {@class = "form-control m-input"})
+                                        <div>
+                                            @Html.ValidationMessageFor(x => x.Oran, null, new {@class = "form-control-feedback"})
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <div class="col-md-6">
+                                        <label>Bitiş Tarihi</label>
+                                        @Html.EditorFor(x => x.BitisTarihi, new {htmlAttributes = new {@class = "form-control m-input m-date"}})
+                                        <div>
+                                            @Html.ValidationMessageFor(x => x.BitisTarihi, null, new {@class = "form-control-feedback"})
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                                
+                            </div>
+                        </div>
+                        <div class="m-portlet__foot m-portlet__foot--fit">
+                            <div class="m-form__actions m-form__actions">
+                                <div class="row">
+                                    <div class="col-lg-2"></div>
+                                    <div class="col-lg-6">
+                                        <button type="submit" class="btn btn-primary">
+                                            Kaydet
+                                        </button>
+                                        <button type="reset" class="btn btn-secondary">
+                                            Reset
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <!--end::Form-->
+                </div>
+                <!--end::Portlet-->
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $(function () {
+            $('.m-date').datepicker({
+                format: "dd/mm/yyyy",
+                autoclose: true
+            });
+        })
+    </script>
+}

@@ -1,0 +1,30 @@
+﻿ul#stars {
+	list-style-type:none;
+	padding:0;
+  
+	-moz-user-select:none;
+	-webkit-user-select:none;
+}
+ul#stars > li.star {
+	display:inline-block;
+  
+}
+
+/* Idle State of the stars */
+ul#stars > li.star > i.fa {
+	font-size:2.5em; /* Change the size of the stars */
+	color:#ccc; /* Color on idle state */
+}
+
+/* Hover state of the stars */
+ul#stars > li.star.hover > i.fa {
+	color:#FFCC36;
+}
+
+/* Selected state of the stars */
+ul#stars > li.star.selected > i.fa {
+	color:#FF912C;
+}
+.m-topbar__userpic{ width: 41px;height: 41px;background-color: #000;-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	border-radius: 50%;display: inline-block !important;line-height: 41px;color: #ccc;}

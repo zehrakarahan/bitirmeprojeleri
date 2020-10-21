@@ -1,0 +1,235 @@
+﻿@model BitirmeProjem.UI.Areas.Admin.Models.VM.UrunlerVM
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="m-grid__item m-grid__item--fluid m-wrapper">
+
+    <div class="m-content">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <!--begin::Portlet-->
+                <div class="m-portlet">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon m--hide">
+                                    <i class="la la-gear"></i>
+                                </span>
+                                <h3 class="m-portlet__head-text">
+                                    Ürün Ekle / Düzenle
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="m-portlet__head-tools">
+                            <ul class="m-portlet__nav">
+                                <li class="m-portlet__nav-item">
+                                    <a href="@Url.Action("Index")" class="m-portlet__nav-link m-portlet__nav-link--icon">
+                                        <i class="la la-long-arrow-left"></i>Listeye Dön
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--begin::Form-->
+                    @using (Html.BeginForm("Add", "Urunler", FormMethod.Post, new { @class = "m-form m-form--fit m-form--label-align-right", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(x => x.ID)
+                        @Html.HiddenFor(x => x.KapakResmi)
+                        @Html.HiddenFor(x => x.Goruntulenme)
+                        <div class="m-portlet__body">
+                            <div class="m-form__section m-form__section--first">
+                                <div class="form-group m-form__group row">
+                                    <div class="col-md-6">
+                                        <label>Kategori</label>
+                                        <div id="kategoriler" class="tree-demo"></div>
+                                        @Html.HiddenFor(x => x.KategoriID)
+                                        <div>
+                                            @Html.ValidationMessageFor(x => x.KategoriID, null, new { @class = "form-control-feedback" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Seçili Kategori</label>
+                                        <span id="SecilenKategori" class="form-control m-input">Murat</span>
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <div class="col-md-6">
+                                        <label>Adı</label>
+                                        @Html.TextBoxFor(x => x.Adi, new {@class = "form-control m-input"})
+                                        <div>
+                                            @Html.ValidationMessageFor(x => x.Adi, null, new {@class = "form-control-feedback"})
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Fiyat</label>
+                                        @Html.TextBoxFor(x => x.Fiyat, new {@class = "form-control m-input"})
+                                        <div>
+                                            @Html.ValidationMessageFor(x => x.Fiyat, null, new {@class = "form-control-feedback"})
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <div class="col-md-6">
+                                        <label>Stok Adedi</label>
+                                        @Html.TextBoxFor(x => x.Stok, new {@class = "form-control m-input"})
+                                        <div>
+                                            @Html.ValidationMessageFor(x => x.Stok, null, new {@class = "form-control-feedback"})
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Yıldız Sayısı</label>
+                                        <ul id='stars'>
+                                            <li class='star' data-value='1'>
+                                                <i class='fa fa-star fa-fw'></i>
+                                            </li>
+                                            <li class='star' data-value='2'>
+                                                <i class='fa fa-star fa-fw'></i>
+                                            </li>
+                                            <li class='star' data-value='3'>
+                                                <i class='fa fa-star fa-fw'></i>
+                                            </li>
+                                            <li class='star' data-value='4'>
+                                                <i class='fa fa-star fa-fw'></i>
+                                            </li>
+                                            <li class='star' data-value='5'>
+                                                <i class='fa fa-star fa-fw'></i>
+                                            </li>
+                                        </ul>
+                                        @Html.HiddenFor(x => x.Yildiz)
+                                        <div>
+                                            @Html.ValidationMessageFor(x => x.Yildiz, null, new {@class = "form-control-feedback"})
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <div class="col-md-6">
+                                        <label>Resim</label>
+                                        <div class="custom-file">
+                                            @Html.TextBoxFor(m => m.File, new {@class = "custom-file-input", placeholder = "Resim", type = "file"})
+                                            <label class="custom-file-label" for="file">
+                                                Dosya Seç
+                                            </label>
+                                        </div>
+                                        @Html.ValidationMessageFor(x => x.File, null, new {@class = "form-control-feedback"})
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group row">
+                                    <div class="col-md-12">
+                                        <label>Detay</label>
+                                        @Html.TextAreaFor(x => x.Detay, new { @class = "form-control m-input summernote" })
+                                        <div>
+                                            @Html.ValidationMessageFor(x => x.Detay, null, new { @class = "form-control-feedback" })
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m-portlet__foot m-portlet__foot--fit">
+                            <div class="m-form__actions m-form__actions">
+                                <div class="row">
+                                    <div class="col-lg-2"></div>
+                                    <div class="col-lg-6">
+                                        <button type="submit" class="btn btn-primary">
+                                            Kaydet
+                                        </button>
+                                        <button type="reset" class="btn btn-secondary">
+                                            Reset
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <!--end::Form-->
+                </div>
+                <!--end::Portlet-->
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            $('#stars li').on('mouseover', function () {
+                var onStar = parseInt($(this).data('value'), 10); 
+
+                $(this).parent().children('li.star').each(function (e) {
+                    if (e < onStar) {
+                        $(this).addClass('hover');
+                    }
+                    else {
+                        $(this).removeClass('hover');
+                    }
+                });
+
+            }).on('mouseout', function () {
+                $(this).parent().children('li.star').each(function (e) {
+                    $(this).removeClass('hover');
+                });
+            });
+
+
+            $('#stars li').on('click', function () {
+                var onStar = parseInt($(this).data('value'), 10);
+                var stars = $(this).parent().children('li.star');
+
+                for (i = 0; i < stars.length; i++) {
+                    $(stars[i]).removeClass('selected');
+                }
+
+                for (i = 0; i < onStar; i++) {
+                    $(stars[i]).addClass('selected');
+                }
+                var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
+                $("#Yildiz").val(ratingValue);
+            });
+        });
+    </script>
+<script>
+        $(function () {
+            $.ajax({
+                async: true,
+                type: "GET",
+                url: "@Url.Action("KategorileriGetir","Kategoriler")",
+                dataType: "json",
+                success: function (json) {
+                    createJSTree(json);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                }
+            });
+        });
+        function createJSTree(jsondata) {
+            $('#kategoriler').jstree({
+                'core': {
+                    'multiple': false,
+                    "check_callback": true,
+                    'data': jsondata
+                },
+                "types": {
+                    "default": {
+                        "icon": "fa fa-folder m--font-brand"
+                    },
+                    "file": {
+                        "icon": "fa fa-file  m--font-brand"
+                    }
+                },
+                "state": { "key": "demo2" }, 
+                "plugins": ["state", "types"]
+            }).on('changed.jstree', function (e, data) {
+                var secilen = (data.instance.get_node(data.selected[0]));
+                $("#KategoriID").val(secilen.id);
+                $("#SecilenKategori").html(secilen.text);
+            });
+        }
+    
+</script>
+}

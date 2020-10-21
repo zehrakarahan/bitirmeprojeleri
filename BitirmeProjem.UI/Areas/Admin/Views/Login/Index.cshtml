@@ -1,0 +1,113 @@
+﻿@model BitirmeProjem.UI.Areas.Admin.Models.LoginVM
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <title>
+        Zehra Shop / Yönetim Paneli
+    </title>
+    <meta name="description" content="Latest updates and statistic charts">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--begin::Web font -->
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+    <script>
+          WebFont.load({
+            google: {"families":["Poppins:300,400,500,600,700","Roboto:300,400,500,600,700"]},
+            active: function() {
+                sessionStorage.fonts = true;
+            }
+          });
+    </script>
+
+    <link href="/Areas/Admin/Content/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="/Areas/Admin/Content/demo/default/base/style.bundle.css" rel="stylesheet" type="text/css" />
+
+</head>
+<!-- end::Head -->
+<!-- end::Body -->
+<body class="m--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
+    <!-- begin:: Page -->
+    <div class="m-grid m-grid--hor m-grid--root m-page">
+        <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-grid--tablet-and-mobile m-grid--hor-tablet-and-mobile m-login m-login--1 m-login--signin" id="m_login">
+            <div class="m-grid__item m-grid__item--order-tablet-and-mobile-2 m-login__aside">
+                <div class="m-stack m-stack--hor m-stack--desktop">
+                    <div class="m-stack__item m-stack__item--fluid">
+                        <div class="m-login__wrapper">
+                            <div class="m-login__logo">
+                                <a href="#">
+                                    <img src="/Content/assets/images/logo.png">
+                                </a>
+                            </div>
+                            <div class="m-login__signin">
+                                <div class="m-login__head">
+                                    <h3 class="m-login__title">
+                                        Giriş Yapın
+                                    </h3>
+                                </div>
+                                @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { @class = "m-login__form m-form",id="frmLogin" }))
+                                {
+                                @Html.AntiForgeryToken()
+                                <div class="form-group m-form__group">
+                                    @Html.TextBoxFor(x => x.UserName, new { @class = "form-control m-input", placeholder = "Kullanıcı Adı", autocomplete = "off" })
+                                    @Html.ValidationMessageFor(x => x.UserName)
+                                </div>
+                                <div class="form-group m-form__group">
+                                    @Html.PasswordFor(x => x.Password, new { @class = "form-control m-input m-login__form-input--last", placeholder = "Şifre", autocomplete = "off" })
+                                    @Html.ValidationMessageFor(x => x.Password)
+                                </div>
+                                <div class="row m-login__form-sub">
+                                    <div class="col m--align-left">
+                                        <label class="m-checkbox m-checkbox--focus">
+                                            @Html.CheckBoxFor(x=>x.Remember)
+                                                Beni Hatırla
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="m-login__form-action">
+                                        <button id="m_login_signin_submit" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">
+                                            Giriş
+                                        </button>
+                                    </div>
+
+                                }
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="m-grid__item m-grid__item--fluid m-grid m-grid--center m-grid--hor m-grid__item--order-tablet-and-mobile-1	m-login__content" style="background-image: url(/Areas/Admin/Content/app/media/img//bg/bg-4.jpg)">
+                <div class="m-grid__item m-grid__item--middle">
+                    <h3 class="m-login__welcome">
+                        Zehra Shop
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end:: Page -->
+    <!--begin::Base Scripts -->
+    <script src="/Areas/Admin/Content/vendors/base/vendors.bundle.js" type="text/javascript"></script>
+    <script src="/Areas/Admin/Content/demo/default/base/scripts.bundle.js" type="text/javascript"></script>
+    <!--end::Base Scripts -->
+    <!--begin::Page Snippets -->
+    <script src="/Areas/Admin/Content/snippets/pages/user/login.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery.validate.min.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.js"></script>
+    <!--end::Page Snippets -->
+    @if (Model != null && Model.Message.Length > 0)
+    {
+        <text>
+            <script>
+                showErrorMsg('danger', '@Model.Message');
+            </script>
+        </text>
+    }
+</body>
+<!-- end::Body -->
+</html>

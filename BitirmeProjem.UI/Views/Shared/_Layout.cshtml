@@ -1,0 +1,107 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/Content/assets/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/assets/lib/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/assets/lib/select2/css/select2.min.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/assets/lib/jquery.bxslider/jquery.bxslider.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/assets/lib/owl.carousel/owl.carousel.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/assets/lib/jquery-ui/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/assets/css/animate.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/assets/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/assets/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="~/Styles/sweetalert.css"  />
+    <link rel="stylesheet" type="text/css" href="/Content/assets/css/responsive.css" />
+
+    <title>141220034 - Zehra KARAHAN</title>
+</head>
+<body>
+    @Html.Partial("Partial/Top")
+    @RenderBody()
+    @Html.Partial("Partial/Footer")
+    <a href="#" class="scroll_top" title="Scroll to Top" style="display: inline;">Scrool</a>
+    <script type="text/javascript" src="/Content/assets/lib/jquery/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="/Content/assets/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/Content/assets/lib/select2/js/select2.min.js"></script>
+    <script type="text/javascript" src="/Content/assets/lib/jquery.bxslider/jquery.bxslider.min.js"></script>
+    <script type="text/javascript" src="/Content/assets/lib/owl.carousel/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="/Content/assets/lib/jquery.countdown/jquery.countdown.min.js"></script>
+    <script type="text/javascript" src="/Content/assets/js/jquery.actual.min.js"></script>
+    <script type="text/javascript" src="/Content/assets/js/theme-script.js"></script>
+    <script src="~/Scripts/sweetalert.min.js"></script>
+    
+    <script type="text/javascript" src="~/Content/assets/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Content/assets/lib/jquery/jquery-1.5.js"></script>
+    <script type="text/javascript" src="~/Content/assets/lib/jquery-ui/external/jquery/jquery.js"></script>
+    @RenderSection("scripts", false);
+    <script>
+        $(document).ready(function () {
+            $(".current-open").click(function () {
+                if ($("#uyeDrop").hasClass("open")) {
+                    $("#uyeDrop").removeClass("open");
+                }
+                else {
+                    $("#uyeDrop").addClass("open");
+                }
+            });
+            sepetGetir();
+            $(".sepet").click(function () {
+                var id=$(this).attr('data-id');
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("SepeteEkle","Sepet")',
+                    data: {urunID:id},
+                    dataType: 'json',
+                    success: function (data) {
+                        alert('ürün sepete eklendi');
+                        sepetGetir();
+                    }
+                });
+                $.ajax({
+                    type: "POST",
+                    url:'@Url.Action("SepetDetay","Sepet")',
+                    data:{urunID:id}
+                })
+               
+            });
+        })
+        function sepetGetir() {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("SepetGetir","Sepet")',
+                dataType: 'json',
+                success: function (data) {
+                    $(".cart-title").text('Sepetinizde toplam ' + data.toplamUrun + ' adet ürün var');
+                    $(".toplamSepet").html(data.toplamUrun);
+                    $(".totalSepet").html((data.toplamUrun) + ' ürün - ' + (data.toplamFiyat) + ' Tl');
+                    $(".totalSepetAlt").html((data.toplamFiyat) + ' Tl');      
+                    var listHtml = '';
+                    var list = data.urunler;
+                    if (list!=undefined) {
+                        $.each(list, function (key, value) {
+                            listHtml+='\
+                          <li class="product-info">\
+                            <div class="p-left">\
+                           <a href="#">\
+						   <img class="img-responsive" src="/Content/images/Urunler/'+value.UrunResim+'" alt="p10">\
+ </a>\
+ </div>\
+ <div class="p-right">\
+ <p class="p-name">'+value.Adet+'</p>\
+ <p class="p-rice">' + value.Fiyat + ' Tl</p>\
+<p>Adet: '+value.UrunAdet+'</p>\</div></li>\'';
+
+                            $("#SepetList").html(listHtml);
+
+                        });
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

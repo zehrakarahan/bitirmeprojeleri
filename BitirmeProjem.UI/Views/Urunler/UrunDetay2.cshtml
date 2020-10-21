@@ -1,0 +1,116 @@
+﻿@model BitirmeProjem.Entities.Concrete.Urunler
+
+@{
+    ViewBag.Title = "Urun Detayi";
+}
+<div class="product-detail-main">
+    <div class="col-lg-6 col-md-6 col-xs-6" id="productImageContainer">
+        <div class="product-detail-left">
+            <div id="photoGallery">
+                <div class="col-lg-10 col-md-10 col-xs-10 no-padding-right">
+                    <div id="slider" class="flexslider slider-container">
+
+                        <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                            <ul>
+                                <li class="clone" aria-hidden="true" style="width: 400px; margin-left:150px; margin-right: 3px; float: left; display: block;">
+                                    <img src="/Content/Images/Urunler/@Model.KapakResmi" onerror="this.src = '/Content/images/defaultThumb.jpg'" title="Princess Party Elbise" data-index="1" data-zoom-image="https://img-trendyol.mncdn.com/mnresize/1200/1800//Assets/ProductImages/oa/60/3338652/1/8682011011644_3_org_zoom.jpg" draggable="false">
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-xs-6" id="productInfoContainer">
+        <div class="product-detail-right">
+            <div class="col-lg-12 col-md-12 col-xs-12 no-padding">
+                <div class="product-detail-info-box">
+                    <div class="product-info-titlebox">
+                        <h1>
+                            <span class="product-name-text">@Model.Adi</span>
+                        </h1>
+                    </div>
+                    <div class="free-shipping-box" style="display: none">
+                        KARGO BEDAVA
+                    </div>
+                    <div class="box-seperator"></div>
+                    <div class="product-info-priceBox  ">
+                        <h5 style="font-size:15px;"><b >Ürün Fiyatı</b></h5>
+                        <span style="font-size:20px; margin-left:5px;" class="market-price">@Model.Fiyat TL</span>
+                       
+
+                    </div>
+                    <hr class="seperator">
+                    <div class="campaign-container">
+                        <a class="basket promotion-link" title="Sepette %20 İndirim" href="/Ollie--Olla---cocuk-Koleksiyonu/ButikDetay/200135" target="_blank">Sepette %20 İndirim</a>
+                    </div>
+                    <br />
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-xs-12 no-padding">
+
+                <div class="addtobasket-btn-box favorite">
+                    <div class="product-add-to-basket-box Out-button-C">
+                        <div data-product-status="Out" id="addToBasketButton" class="addBasket">
+                           
+                        </div>
+                    </div>
+                    <div class="add-to-favorite" productcontentid="3338652" saleprice="52,99" boutiqueenddate="1541990700000" productmainid="4661867" productcolorid="1262">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="18" viewBox="0 -15 22 50">
+                            <path fill="none" fill-rule="evenodd" stroke="#8C8C8C" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3" d="M22 6.461c0-6.464-9.428-7.299-10.5-.837C10.43-.838 1-.498 1 6.461 1 13.42 11.5 19 11.5 19S22 12.922 22 6.461z"></path>
+                        </svg>
+                        <div class="heart-animation-1"></div>
+                        <div class="heart-animation-2"></div>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+@{
+    var uyeler = (List<BitirmeProjem.Entities.Concrete.Uyeler>)ViewBag.Uyeler;
+    var yorumlar = (List<BitirmeProjem.Entities.Concrete.Yorumlar>)ViewBag.Yorumlar;
+    foreach (var item in yorumlar)
+    {
+        <div class="product-comments-block-tab" style="margin-top:20px;">
+            <div class="comment row">
+                <div class="col-sm-3 author">
+                    <div class="product-star">
+                        @for (int i = 0; i < @item.Puan; i++)
+                        {
+                            <i class="fa fa-star"></i>
+                        }
+                    </div>
+                    <div class="info-author">
+                       @item.Uyeler.Adi @item.Uyeler.Soyadi
+                       
+                    </div>
+                </div>
+                <div class="col-sm-9 commnet-dettail">
+                    @item.Yorum
+                </div>
+               
+
+            </div>
+            </div>
+    }
+    
+
+        <button type="button" style="background:blue" class="btn btn-secondary">Yorum Yap</button>
+       
+   
+}
+
+
+

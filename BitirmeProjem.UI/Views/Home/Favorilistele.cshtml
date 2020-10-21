@@ -1,0 +1,66 @@
+﻿@model List<BitirmeProjem.Entities.Concrete.Favoriler>
+@{
+    ViewBag.Title = "Favorilistele";
+    // var urunler = (List<BitirmeProjem.Entities.Concrete.Urunler>)ViewBag.urunler;
+}
+<h2>Favorilerim</h2>
+<div>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<table class="table table-bordered table-responsive cart_summary">
+        <thead>
+            <tr>
+                <th class="cart_product">Product</th>
+                <th>Description</th>
+                <th>Avail.</th>
+                <th>Unit price</th>
+                <th>Qty</th>
+
+                <th class="action"><i class="fa fa-trash-o"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+         @if (Model != null)
+         {
+             foreach (var item in Model)
+             {
+            <tr>
+                <td class="cart_product">
+                    <a href="#"><img src="assets/data/product-100x122.jpg" alt="Product"></a>
+                </td>
+                <td class="cart_description">
+                    <p class="product-name"><a href="#">@item.Urunler.Adi </a></p>
+                    <small class="cart_ref">SKU : #123654999</small><br>
+                    <small><a href="#">Color : Beige</a></small><br>
+                    <small><a href="#">Size : S</a></small>
+                </td>
+                <td class="cart_avail"><span class="label label-success">In stock</span></td>
+                <td class="price"><span>61,19 €</span></td>
+                <td class="qty">
+                    <input class="form-control input-sm" type="text" value="1">
+                    <a href="#"><i class="fa fa-caret-up"></i></a>
+                    <a href="#"><i class="fa fa-caret-down"></i></a>
+                </td>
+
+                <td class="action">
+                    <a href="#">Delete item</a>
+                </td>
+            </tr>
+             }
+         }
+        </tbody>
+
+    </table>
+
+@section scripts{
+  
+
+  
+}
+
+}
+

@@ -1,0 +1,33 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>getCookie</title>
+</head>
+<body>
+    <div style="margin-top:5px;"> 
+        
+        <div class="primary-box row">
+            <div class="pb-left-column col-xs-6 col-sm-3">
+                <!-- product-imge-->
+                <div class="product-image">
+                    <div class="product-full">
+                        <img id="product-zoom" style="width:70px; height:70px;" src="~/Content/images/Urunler/@ViewBag.UrunResmi" data-zoom-image="/Content/images/Urunler/bayan-orjinal-kar-botu.jpg">
+                    </div>
+                </div>
+                <!-- product-imge-->
+            </div>
+            <div class="pb-right-column col-xs-6 col-sm-3">
+                <h1 class="product-name" style="font-size:15px; margin-top:27px;">@ViewBag.UrunAdi</h1>
+                <div class="product-price-group">
+                    <span class="price">@ViewBag.UrunFiyati TL</span>
+                </div>
+                
+                </div>
+               
+            </div>
+        </div>
+</body>
+</html>

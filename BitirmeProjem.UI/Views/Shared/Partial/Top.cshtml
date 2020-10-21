@@ -1,0 +1,181 @@
+﻿@using System.Web.Script.Serialization
+@using BitirmeProjem.Entities.Concrete
+@using BitirmeProjem.UI.Helpers
+@using BitirmeProjem.UI.Models.VM
+@using BitirmeProjem.UI.Models
+    @{
+        var categories = (List<TreeViewKategori>)Session["Kategoriler"];
+    }
+    <div id="header" class="header">
+        <div class="top-header">
+            <div class="container">
+                <div class="nav-top-links">
+                    <a class="first-item" href="#"><img alt="phone" src="/Content/assets/images/phone.png" />+90(332) 223 88 18</a>
+                    <a href="#"><img alt="email" src="/Content/assets/images/email.png" />Bize Ulaşın!</a>
+                </div>
+
+                <div id="user-info-top" class="user-info pull-right">
+                    <div class="dropdown" id="uyeDrop">
+
+                        @if (Session["Uye"] == null)
+                        {
+                            <a class="current-open" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><span>Hesabım</span></a>
+                            <ul class="dropdown-menu mega_dropdown" role="menu">
+                                <li><a href="@Url.Action("UyeGiris","Uye")">Giriş Yap</a></li>
+                                <li><a href="@Url.Action("UyeOl","Uye")">Üye Ol</a></li>
+                            </ul>
+
+                        }
+                        else
+                        {
+                            JavaScriptSerializer js = new JavaScriptSerializer();
+                            var user = js.Deserialize<UyeOl>(Session["Uye"].ToString());
+                            <a class="current-open" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><span>@user.Adi @user.Soyadi</span></a>
+                            <ul class="dropdown-menu mega_dropdown" role="menu">
+                                <li><a href="@Url.Action("CikisYap","Uye")">Çıkış Yap</a></li>
+                                <li><a href="@Url.Action("Favorilistele","Home")">Favorilere Git</a></li>
+                            </ul>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.top-header -->
+        <!-- MAIN HEADER -->
+        <div class="container main-header">
+            <div class="row">
+                <div class="col-xs-12 col-sm-3 logo">
+                    <a href="/"><img alt="Zehra Shop" src="/Content/assets/images/logo.png" /></a>
+                </div>
+                <div class="col-xs-7 col-sm-7 header-search-box">
+                    <form class="form-inline">
+                        <div class="form-group form-category">
+                            <select class="select-category">
+                                <option value="2">Tüm Kategoriler</option>
+                                <option value="1">Men</option>
+                                <option value="2">Women</option>
+                            </select>
+                        </div>
+                        <div class="form-group input-serach">
+                            <input type="text" placeholder="Ürün ara..">
+                        </div>
+                        <button type="submit" class="pull-right btn-search"></button>
+                    </form>
+                </div>
+                <div id="cart-block" class="col-xs-5 col-sm-2 shopping-cart-box">
+                    <a class="cart-link" href="#">
+                        <span class="title">Sepetim</span>
+                        <span class="total totalSepet"></span>
+                        <span class="notify notify-left toplamSepet">2</span>
+                    </a>
+                    <div class="cart-block">
+                        <div class="cart-block-content">
+                            <h5 class="cart-title"></h5>
+                            <div class="cart-block-list">
+                                <ul id="SepetList">
+
+                                </ul>
+                            </div>
+                            <div class="toal-cart">
+                                <span>Toplam</span>
+                                <span class="toal-price pull-right totalSepetAlt"></span>
+                            </div>
+                            <div class="cart-buttons">
+                                <a href="@Url.Action("SepetDetay","Sepet")" class="btn-check-out">Sepete Git</a>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- END MANIN HEADER -->
+        <div id="nav-top-menu" class="nav-top-menu">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3" id="box-vertical-megamenus">
+                        <div class="box-vertical-megamenus">
+                            <h4 class="title">
+                                <span class="title-menu">Categories</span>
+                                <span class="btn-open-mobile pull-right home-page"><i class="fa fa-bars"></i></span>
+                            </h4>
+                            <div class="vertical-menu-content is-home">
+                                <ul class="vertical-menu-list">
+                                    @foreach (var item in categories.Where(x => x.UstID == null))
+                                    {
+                                        var cls = "";
+                                        if (categories.IndexOf(item) > 10)
+                                        {
+                                            cls = "cat-link-orther";
+                                        }
+                                        <li class="@cls">
+                                            <a class="parent" href="#">
+                                                @item.text
+                                            </a>
+                                            @if (item.children.Count > 0)
+                                            {
+                                                <div class="vertical-dropdown-menu">
+                                                    <div class="vertical-groups col-sm-12">
+                                                        @foreach (var subItem in item.children)
+                                                        {
+                                                            <div class="mega-group col-sm-3">
+                                                                <h4 class="mega-group-header"><span>@subItem.text</span></h4>
+                                                                <ul class="group-link-default">
+                                                                    @foreach (var child in subItem.children)
+                                                                    {
+                                                                        <li><a href="#">@child.text</a></li>
+                                                                    }
+                                                                </ul>
+                                                            </div>
+                                                        }
+
+                                                    </div>
+                                                </div>
+                                            }
+                                        </li>
+                                    }
+
+
+                                </ul>
+                                <div class="all-category"><span class="open-cate">Tum Kategoriler</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="main-menu" class="col-sm-9 main-menu">
+                        <nav class="navbar navbar-default">
+                            <div class="container-fluid">
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                        <i class="fa fa-bars"></i>
+                                    </button>
+                                    <a class="navbar-brand" href="#">MENU</a>
+                                </div>
+                                <div id="navbar" class="navbar-collapse collapse">
+                                    <ul class="nav navbar-nav">
+                                        <li class="active"><a href="#">Anasayfa</a></li>
+                                        <li><a href="#">Yıldızlı Ürünler</a></li>
+                                        <li><a href="#">Çok Satanlar</a></li>
+                                        <li><a href="#">Kampanyalı Ürünler</a></li>
+                                        <li><a href="#">Sık Sorulan Sorular</a></li>
+                                    </ul>
+                                </div><!--/.nav-collapse -->
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+                <!-- userinfo on top-->
+                <div id="form-search-opntop">
+                </div>
+                <!-- userinfo on top-->
+                <div id="user-info-opntop">
+                </div>
+                <!-- CART ICON ON MMENU -->
+                <div id="shopping-cart-box-ontop">
+                    <i class="fa fa-shopping-cart"></i>
+                    <div class="shopping-cart-box-ontop-content"></div>
+                </div>
+            </div>
+        </div>
+    </div>

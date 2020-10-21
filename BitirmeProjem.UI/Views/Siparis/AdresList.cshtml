@@ -1,0 +1,261 @@
+﻿@model BitirmeProjem.UI.ViewModel.SehirViewModel
+<div class="columns-container">
+    <div class="container" id="columns">
+        <!-- breadcrumb -->
+        <div class="breadcrumb clearfix">
+            <a class="home" href="#" title="Anasayfaya Git">Anasayfa</a>
+            <span class="navigation-pipe">&nbsp;</span>
+            <span class="navigation_page">Adres</span>
+        </div>
+        <!-- ./breadcrumb -->
+        <!-- page heading-->
+        <h2 class="page-heading">
+            <span class="page-heading-title2">Adres Seçimi</span>
+        </h2>
+        <!-- ../page heading-->
+        <div class="page-content">
+            <div class="row">
+                <div class="col-md-6"> 
+                    <div class="form-group">
+                        <!-- Street 1 -->
+                        <label for="street1_id" class="control-label" id="adresBasligi3">Adres Bilgisi</label>
+                        @Html.DropDownListFor(m => m.AdresId, Model.AdresList,new {@class="form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        <!-- Submit Button -->
+                        <button type="button" id="siparistamamla1" href="javascirpt:void(0)" class="btn btn-primary"><a onclick="git()"  href="#">Seçilen Adresle Devam Et!</a></button>
+                        
+                    </div>
+                </div> 
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <!-- Full Name -->
+                        <label for="full_name_id" id="baslik" class="control-label">Adres Adı:</label>
+                        <input type="text" class="form-control" id="adresBasligi" placeholder="Yeni Adres Adı">
+                    </div>
+                    <div class="form-group">
+                        <!-- City-->
+                        <label for="city_id" class="control-label">Sehir:</label>
+                        @Html.DropDownListFor(m => m.Id, Model.SehirList,new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        <!-- State Button -->
+                        <label for="state_id" class="control-label">Ilce:</label>
+                        @Html.DropDownListFor(m => m.IlceId, Model.IlceList, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label for="state_id" class="control-label" id="adresBasligi2" style="margin-top:1px;">Adres Bilgisi:</label>
+                        <input type="text" class="form-control" id="adresbilgisi" placeholder="yeni gonderilecek" value="Adres Giriniz">
+                    </div>
+                    <div class="form-group">
+                        <!-- Submit Button -->
+                        <button type="button" id="siparistamamla" href="javascirpt:void(0)" class="btn btn-primary"><a  href="#">Kaydet ve Devam Et!</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section scripts
+{
+  
+
+  
+    @*
+
+           <script>
+            $(function () {
+
+
+                $("#yeniadres").click(function () {
+                    $("#adresBasligi1").fadeIn();
+                    $("#adresBasligi2").fadeIn();
+                    ss = $("#adresBasligi1").css('display');
+
+
+                });
+            });
+
+        </script>*@
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#Id").change(function () {
+                var id = $(this).val();
+                var ilceList = $("#IlceId");
+                ilceList.empty();
+                $.ajax({
+                    url: '/Siparis/IlceList',
+                    type: 'POST',
+                    datatype: 'json',
+                    data: { 'id': id },
+                    success: function (data) {
+                        $.each(data, function (index, option) {
+                            ilceList.append('<option value=' + option.Value + '>' + option.Text + '</option>')
+                        });
+                    }
+
+                });
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var id = $(this).val();
+            $.ajax({
+                url: '/Siparis/IlceList',
+                type: 'POST',
+                datatype: 'json',
+                data: { 'id': id },
+                success: function (data) {
+                    alert("bu alana hosgeldiniz");
+                }
+
+            });
+
+        });
+    </script>
+    <script>
+        function git() {
+           
+            window.location.replace("/Siparis/SonucKismi/" + $('#AdresId').val());
+        }
+      
+
+        function git3() {
+          
+            window.location.replace("/Siparis/Sonuc/" + $("#adresbilgisi").val());
+            
+        }
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#siparistamamla").click(function () {
+               
+               
+                var baslik = $("#adresBasligi").val();
+                var adres = $("#adresbilgisi").val();
+               
+              
+                $.ajax({
+                    url: '/Siparis/Deneme',
+                    type: 'POST',
+                    datatype: 'json',
+                    data: { 'baslik': baslik, 'ilId': $("#Id").val(), 'IlceId': $("#IlceId").val(), 'adres': adres },
+                    success: function(data) {
+                        alert("basarili bir sekilde veritabanına eklenmiştir...");
+                        git3();
+
+                    }
+                });
+                return false;
+
+
+            });
+        });
+
+    </script>
+
+    <script src="~/Scripts/sweetalert.min.js"></script>
+    @*  <script>
+
+
+               $(function() {
+                    $("#siparistamamla").click(function () {
+
+                        sweetAlert({
+                            title:"Alışverişi tamamlamak ister misiniz?",
+                            type:"success",
+                            allowEscapeKey:false,
+                            allowOutsideClick: true,
+                            showCancelButton: true,
+                            cancelButtonText: 'İptal ',
+                            confirmButtonText: 'Evet'
+
+
+                        });
+                    });
+
+                });
+        }*@
+    @*<script type="text/javascript">
+        $(document).ready(function(){
+            $("#siparistamamla").on("click", function () {
+
+                var id = jQuery(this).prevAll('input[name="id"]').val();
+
+                var Data = "id="+id;
+                //alert(Data);
+
+                swal({
+                  title: "Emin misiniz?",
+                  text: "<strong>Alışveriş Sonlandırılıyor!</strong>",
+                  type: "success",
+                  html: true,
+                  showCancelButton: true,
+                 // confirmButtonColor: "#DD6B55",
+                  confirmButtonText: "Evet, silinsin!",
+                  cancelButtonText: "Hayır, vazgeç!",
+                  closeOnConfirm: false,
+                  closeOnCancel: false
+                },
+                function(isConfirm){
+                  if (isConfirm) {
+                      alert($("#IlceId").val());
+                      var ss = $("#adresBasligi1").css('display');
+                      var sayi = $("#adresBasligi1").val();
+                      var deger;
+                      if (ss == 'none') {
+                          deger = $("#adresbilgisi").val()
+                      }
+                      else {
+
+                          deger = sayi;
+                      }
+                      alert(deger);
+
+                      $.ajax({
+                          url: '/Siparis/Deneme',
+                          type: 'POST',
+                          datatype: 'json',
+                          data: { 'baslik': $("#adresBasligi").val(), 'ilId': $("#Id").val(), 'IlceId': $("#IlceId").val(), 'adres': deger },
+                          success: function (data) {
+                              alert("basarili bir odeme yaptiniz");
+                          }
+                      });
+
+                    swal({
+                        title: "Silindi!",
+                        text: "<strong>Kullanıcı Başarıyla Silindi.</strong>",
+                        type: "success",
+                        html: true,
+                        },
+                       function(){
+                           location.reload();
+                       }
+                    );
+
+                  } else {
+
+                    swal({
+                      title: "İptal",
+                      text: "<strong>Kullanıcı Silme İşlemi İptal Edildi.</strong>",
+                      type: "error",
+                      html: true,
+
+                    });
+                  }
+                });
+            });
+        })
+        </script>
+    *@
+
+
+}

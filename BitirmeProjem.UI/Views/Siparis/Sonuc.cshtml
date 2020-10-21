@@ -1,0 +1,66 @@
+﻿
+@model List<BitirmeProjem.UI.Models.SepetUrun>
+@{
+    ViewBag.Title = "Sonuc";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-content">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <!-- Street 1 -->
+                <label for="street1_id" class="control-label" id="adresBasligi3"><h2>Adi Soyadi :</h2></label>
+                <label for="street1_id" class="control-label" id="adresBasligi3">@ViewBag.kisiadi @ViewBag.kisisoyadi</label>
+            </div>
+            <div class="form-group">
+                <table class="table table-bordered table-responsive cart_summary">
+                    <thead>
+                        <tr>
+                            <th class="cart_product">Ürün Resimleri</th>
+                            <th>Ürün Bilgileri</th>
+                            <th>Ürün Fiyatları</th>
+                            <th>Ürün Adetleri</th>
+                            <th>Total Fiyatımız</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="cart_product">
+                                        <a href="#"><img src="~/Content/images/Urunler/@item.UrunResim" alt="Product"></a>
+                                    </td>
+                                    <td class="cart_description">
+                                        <p class="product-name"><a href="#">@item.UrunAdi </a></p>
+                                        <small class="cart_ref">SKU : #123654999</small><br>
+                                    </td>
+                                    <td class="price"><span>@item.Fiyat TL</span></td>
+                                    <td class="qty">
+                                        @item.Adet
+                                    </td>
+                                    <td class="price">
+                                        <span>@item.Fiyat TL</span>
+                                    </td>
+
+                                </tr>
+                            }
+                        }
+
+                    </tbody>
+
+                </table>
+            </div>
+            <div class="form-group">
+                <label for="street1_id" class="control-label" id="adresBasligi3"><h2>Adres Bilgisi :</h2></label>
+                @ViewBag.uyeadres
+            </div>
+        </div>
+    </div>
+</div>
+
+

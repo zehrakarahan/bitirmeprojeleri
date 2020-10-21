@@ -1,0 +1,1368 @@
+﻿@model BitirmeProjem.Entities.Concrete.Urunler
+@{
+    ViewBag.Title = "Index";
+
+}
+<div id="home-slider">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3 slider-left"></div>
+            <div class="col-sm-9 header-top-right">
+                <div class="homeslider">
+                    <div class="content-slide">
+                        <ul id="contenhomeslider">
+                            <li><img alt="Funky roots" src="/Content/assets/data/slide.jpg" title="Funky roots" /></li>
+                            <li><img alt="Funky roots" src="/Content/assets/data/slide.jpg" title="Funky roots" /></li>
+                            <li><img alt="Funky roots" src="/Content/assets/data/slide.jpg" title="Funky roots" /></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="header-banner banner-opacity">
+                    <a href="#"><img alt="Funky roots" src="/Content/assets/data/bs2.jpg" /></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-page">
+    <div class="container">
+        <!-- featured category fashion -->
+        <div class="category-featured">
+            <nav class="navbar nav-menu nav-menu-red show-brand">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-brand"><a href="#">Kadın Ayakkabıları</a></div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                </div><!-- /.container-fluid -->
+                <div id="elevator-1" class="floor-elevator">
+                    <a href="#" class="btn-elevator up disabled fa fa-angle-up"></a>
+                    <a href="#elevator-2" class="btn-elevator down fa fa-angle-down"></a>
+                </div>
+            </nav>
+
+            <div class="product-featured clearfix">
+
+                <div class="product-featured-content">
+                    <div class="product-featured-list">
+                        <div class="tab-container">
+                            <!-- tab product -->
+                            <div class="tab-panel active" id="tab-4">
+                                <ul class="product-list owl-carousel" data-dots="false" data-loop="true" data-nav="true" data-margin="0" data-autoplayTimeout="1000" data-autoplayHoverPause="true" data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":4}}'>
+                                    @{
+                                        var kadinayakkabilari = (List<BitirmeProjem.Entities.Concrete.Urunler>)ViewBag.KadinAyakkabilari;
+                                        foreach (var item in kadinayakkabilari)
+                                        {
+                                            <li>
+                                                <div class="left-block">
+                                                    <a href="#">
+                                                        <img class="img-responsive" alt="product" src="~/Content/images/Urunler/@item.KapakResmi" />
+                                                    </a>
+                                                    <div class="quick-view">
+                                                        @if (Session["Uye"] == null)
+                                                        {
+
+                                                            //<button><a href="/Uye/UyeGiris" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+
+
+                                                        <a title="Add to my wishlist"   class="heart favoriekle1" href="/Uye/UyeGiris"></a>
+                                                        }
+                                                        else
+                                                        { 
+                                                        <a title="Add to my wishlist"  data-id="@item.ID" class="heart favoriekle1" href="#"></a>
+                                                        }
+                                                        <a title="Add to compare" class="compare" href="#"></a>
+                                                        <a title="Quick view" class="search" href="#"></a>
+                                                    </div>
+                                                    @*SEPETE EKLEME ALANİ href="javascript:void(0)"*@
+                                                    <div class="add-to-cart">
+                                                        <a title="Add to Cart" href="javascirpt:void(0)"  class="sepet" data-id="@item.ID">Sepete Ekle</a>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <btn><a href="/Urunler/UrunDetay/@item.ID" style="height:35px; width:285px; margin-left:2px;" class="btn btn-success">İncele</a></btn>
+                                                <div class="right-block">
+                                                    <h5 class="product-name"><a href="#">@item.Adi</a></h5>
+                                                    <div class="content_price">
+                                                        <span class="price product-price">@item.Fiyat TL</span>
+                                                    </div>
+                                                    <div class="product-star">
+                                                        @for (int i = 0; i < @item.Yildiz; i++)
+                                                        {
+                                                            <i class="fa fa-star"></i>
+                                                        }
+
+                                                    </div>
+                                                </div>
+                                            </li>
+
+                                        }
+                                    }
+
+                                </ul>
+                            </div>
+                            <!-- tab product -->
+                            <div class="tab-panel" id="tab-5">
+                                <ul class="product-list owl-carousel" data-dots="false" data-loop="true" data-nav="true" data-margin="0" data-autoplayTimeout="1000" data-autoplayHoverPause="true" data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":4}}'>
+                                    <li>
+                                        <div class="left-block">
+                                            <a href="#">
+                                                <img class="img-responsive" alt="product" src="assets/data/04_nice-dress.jpg" />
+                                            </a>
+                                            <div class="quick-view">
+                                              
+                                                @if (Session["Uye"] == null)
+                                                {
+
+                                                    //<button><a href="/Uye/UyeGiris" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+                                                <a title="Add to my wishlist" class="heart favoriekle1" href="/Uye/UyeGiris"></a>
+                                                }
+                                                else
+                                                { 
+                                                <a title="Add to my wishlist" class="heart favoriekle1" href="#"></a>
+                                                }
+                                                <a title="Add to compare" class="compare" href="#"></a>
+                                                <a title="Quick view" class="search" href="#"></a>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a title="Add to Cart" href="#">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                        <div class="right-block">
+                                            <h5 class="product-name"><a href="#">Nice Dress</a></h5>
+                                            <div class="content_price">
+                                                <span class="price product-price">$38,95</span>
+                                                <span class="price old-price">$52,00</span>
+                                            </div>
+                                            <div class="product-star">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half-o"></i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="left-block">
+                                            <a href="#">
+                                                <img class="img-responsive" alt="product" src="assets/data/05_flowers-dress.jpg" />
+                                            </a>
+                                            <div class="quick-view">
+                                                @if (Session["Uye"] == null)
+                                                {
+
+                                                    //<button><a href="/Uye/UyeGiris" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+
+
+                                                <a title="Add to my wishlist" class="heart favoriekle1" href="/Uye/UyeGiris"></a>
+                                                }
+                                                else
+                                                {
+                                                <a title="Add to my wishlist"  class="heart favoriekle1" href="#"></a>
+                                                }
+                                                <a title="Add to compare" class="compare" href="#"></a>
+                                                <a title="Quick view" class="search" href="#"></a>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a title="Add to Cart" href="#">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                        <div class="right-block">
+                                            <h5 class="product-name"><a href="#">Flowers Dress</a></h5>
+                                            <div class="content_price">
+                                                <span class="price product-price">$38,95</span>
+                                                <span class="price old-price">$52,00</span>
+                                            </div>
+                                            <div class="product-star">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half-o"></i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="left-block">
+                                            <a href="#">
+                                                <img class="img-responsive" alt="product" src="assets/data/06_red-dress.jpg" />
+                                            </a>
+                                            <div class="quick-view">
+                                                @if (Session["Uye"] == null)
+                                                {
+
+                                                    //<button><a href="/Uye/UyeGiris" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+
+
+                                                <a title="Add to my wishlist" class="heart favoriekle1" href="/Uye/UyeGiris"></a>
+                                                }
+                                                else
+                                                {
+                                                <a title="Add to my wishlist" class="heart favoriekle1" href="#"></a>
+                                                }
+                                                <a title="Add to compare" class="compare" href="#"></a>
+                                                <a title="Quick view" class="search" href="#"></a>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a title="Add to Cart" href="#">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                        <div class="right-block">
+                                            <h5 class="product-name"><a href="#">Red Dress</a></h5>
+                                            <div class="content_price">
+                                                <span class="price product-price">$38,95</span>
+                                                <span class="price old-price">$52,00</span>
+                                            </div>
+                                            <div class="product-star">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half-o"></i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="left-block">
+                                            <a href="#">
+                                                <img class="img-responsive" alt="product" src="assets/data/01_blue-dress.jpg" />
+                                            </a>
+                                            <div class="quick-view">
+                                                @if (Session["Uye"] == null)
+                                                {
+
+                                                    //<button><a href="/Uye/UyeGiris" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+
+
+                                                <a title="Add to my wishlist" class="heart favoriekle1" href="/Uye/UyeGiris"></a>
+                                                }
+                                                else
+                                                { 
+                                                <a title="Add to my wishlist" class="heart favoriekle1" href="#"></a>
+                                                }
+                                                <a title="Add to compare" class="compare" href="#"></a>
+                                                <a title="Quick view" class="search" href="#"></a>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a title="Add to Cart" href="#">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                        <div class="right-block">
+                                            <h5 class="product-name"><a href="#">Blue Dress</a></h5>
+                                            <div class="content_price">
+                                                <span class="price product-price">$38,95</span>
+                                                <span class="price old-price">$52,00</span>
+                                            </div>
+                                            <div class="product-star">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half-o"></i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="left-block">
+                                            <a href="#">
+                                                <img class="img-responsive" alt="product" src="assets/data/02_yellow-dress.jpg" />
+                                            </a>
+                                            <div class="quick-view">
+                                                @if (Session["Uye"] == null)
+                                                {
+
+                                                    //<button><a href="/Uye/UyeGiris" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+
+
+                                                <a title="Add to my wishlist" class="heart favoriekle1" href="/Uye/UyeGiris"></a>
+                                                }
+                                                else
+                                                {
+                                                    <a title="Add to my wishlist" class="heart favoriekle1" href="#"></a>
+                                                }
+                                                <a title="Add to compare" class="compare" href="#"></a>
+                                                <a title="Quick view" class="search" href="#"></a>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a title="Add to Cart" href="#">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                        <div class="right-block">
+                                            <h5 class="product-name"><a href="#">Yellow Dress</a></h5>
+                                            <div class="content_price">
+                                                <span class="price product-price">$38,95</span>
+                                                <span class="price old-price">$52,00</span>
+                                            </div>
+                                            <div class="product-star">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half-o"></i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="left-block">
+                                            <a href="#">
+                                                <img class="img-responsive" alt="product" src="assets/data/03_cyan-dress.jpg" />
+                                            </a>
+                                            <div class="quick-view">
+                                                @if (Session["Uye"] == null)
+                                                {
+
+                                                    //<button><a href="/Uye/UyeGiris" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+
+
+                                                <a title="Add to my wishlist" class="heart favoriekle1" href="/Uye/UyeGiris"></a>
+                                                }
+
+                                                else
+                                                {
+                                                    <a title="Add to my wishlist" class="heart favoriekle1" href="#"></a>
+                                                }
+                                                <a title="Add to compare" class="compare" href="#"></a>
+                                                <a title="Quick view" class="search" href="#"></a>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a title="Add to Cart" href="#">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                        <div class="right-block">
+                                            <h5 class="product-name"><a href="#">Cyan Dress</a></h5>
+                                            <div class="content_price">
+                                                <span class="price product-price">$38,95</span>
+                                                <span class="price old-price">$52,00</span>
+                                            </div>
+                                            <div class="product-star">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half-o"></i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="left-block">
+                                            <a href="#">
+                                                <img class="img-responsive" alt="product" src="assets/data/04_nice-dress.jpg" />
+                                            </a>
+                                            <div class="quick-view">
+                                                @if (Session["Uye"] == null)
+                                                {
+
+                                                    //<button><a href="/Uye/UyeGiris" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+
+
+                                                <a title="Add to my wishlist" class="heart favoriekle1" href="/Uye/UyeGiris"></a>
+                                                }
+
+                                                else
+                                                {
+                                                    <a title="Add to my wishlist" class="heart favoriekle1" href="#"></a>
+                                                }
+                                                <a title="Add to compare" class="compare" href="#"></a>
+                                                <a title="Quick view" class="search" href="#"></a>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a title="Add to Cart" href="#">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                        <div class="right-block">
+                                            <h5 class="product-name"><a href="#">Nice Dress</a></h5>
+                                            <div class="content_price">
+                                                <span class="price product-price">$38,95</span>
+                                                <span class="price old-price">$52,00</span>
+                                            </div>
+                                            <div class="product-star">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half-o"></i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="left-block">
+                                            <a href="#">
+                                                <img class="img-responsive" alt="product" src="assets/data/05_flowers-dress.jpg" />
+                                            </a>
+                                            <div class="quick-view">
+                                                @if (Session["Uye"] == null)
+                                                {
+
+                                                    //<button><a href="/Uye/UyeGiris" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+
+
+                                                <a title="Add to my wishlist" class="heart favoriekle1" href="/Uye/UyeGiris"></a>
+                                                }
+
+                                                else
+                                                {
+                                                    <a title="Add to my wishlist" class="heart favoriekle1" href="#"></a>
+                                                }
+                                                <a title="Add to compare" class="compare" href="#"></a>
+                                                <a title="Quick view" class="search" href="#"></a>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a title="Add to Cart" href="#">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                        <div class="right-block">
+                                            <h5 class="product-name"><a href="#">Flowers Dress</a></h5>
+                                            <div class="content_price">
+                                                <span class="price product-price">$38,95</span>
+                                                <span class="price old-price">$52,00</span>
+                                            </div>
+                                            <div class="product-star">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half-o"></i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="left-block">
+                                            <a href="#">
+                                                <img class="img-responsive" alt="product" src="assets/data/06_red-dress.jpg" />
+                                            </a>
+                                            <div class="quick-view">
+                                                @if (Session["Uye"] == null)
+                                                {
+
+                                                    //<button><a href="/Uye/UyeGiris" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+
+
+                                                <a title="Add to my wishlist" class="heart favoriekle1" href="/Uye/UyeGiris"></a>
+                                                }
+
+                                                else
+                                                {
+                                                    <a title="Add to my wishlist" class="heart favoriekle1" href="#"></a>
+                                                }
+                                                <a title="Add to compare" class="compare" href="#"></a>
+                                                <a title="Quick view" class="search" href="#"></a>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a title="Add to Cart" href="#">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                        <div class="right-block">
+                                            <h5 class="product-name"><a href="#">Red Dress</a></h5>
+                                            <div class="content_price">
+                                                <span class="price product-price">$38,95</span>
+                                                <span class="price old-price">$52,00</span>
+                                            </div>
+                                            <div class="product-star">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half-o"></i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- end featured category fashion -->
+        <!-- featured category sports -->
+        <div class="category-featured">
+            <nav class="navbar nav-menu nav-menu-green show-brand">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-brand"><a href="#">Erkek Ayakkabıları</a></div>
+                    <span class="toggle-menu"></span>
+
+                </div><!-- /.container-fluid -->
+                <div id="elevator-2" class="floor-elevator">
+                    <a href="#elevator-1" class="btn-elevator up fa fa-angle-up"></a>
+                    <a href="#elevator-3" class="btn-elevator down fa fa-angle-down"></a>
+                </div>
+            </nav>
+            <div class="product-featured clearfix">
+
+                <div class="product-featured-content">
+                    <div class="product-featured-list">
+                        <div class="tab-container">
+                            <!-- tab product -->
+                            <div class="tab-panel active" id="tab-4">
+                                <ul class="product-list owl-carousel" data-dots="false" data-loop="true" data-nav="true" data-margin="0" data-autoplayTimeout="1000" data-autoplayHoverPause="true" data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":4}}'>
+                                    @{
+                                        var erkekayakkabilari = (List<BitirmeProjem.Entities.Concrete.Urunler>)ViewBag.ErkekAyakkabilari;
+                                        foreach (var item in erkekayakkabilari)
+                                        {
+                                            <li>
+                                                <div class="left-block">
+                                                    <a href="#">
+                                                        <img class="img-responsive" alt="product" src="~/Content/images/Urunler/@item.KapakResmi" />
+                                                    </a>
+                                                    <div class="quick-view">
+                                                        @if (Session["Uye"] == null)
+                                                        {
+
+                                                            //<button><a href="/Uye/UyeGiris" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+
+
+                                                        <a title="Add to my wishlist" class="heart favoriekle1" href="/Uye/UyeGiris"></a>
+                                                        }
+                                                        else
+                                                        {
+                                                        <a title="Add to my wishlist" data-id="@item.ID" class="heart favoriekle1" href="#"></a>
+                                                        }
+                                                        <a title="Add to compare" class="compare" href="#"></a>
+                                                        <a title="Quick view" class="search" href="#"></a>
+                                                    </div>
+                                                    <div class="add-to-cart">
+                                                       
+                                                        <a title="Add to Cart" href="javascript:void(0)" class="sepet" data-id="@item.ID">Sepete Ekle</a>
+                                                    </div>
+                                                </div>
+                                                <btn><a href="/Urunler/UrunDetay/@item.ID" style="height:35px; width:285px; margin-left:2px;" class="btn btn-success">İncele</a></btn>
+                                                <div class="right-block">
+                                                    <h5 class="product-name"><a href="#">@item.Adi</a></h5>
+                                                    <div class="content_price">
+                                                        <span class="price product-price">@item.Fiyat TL</span>
+                                                    </div>
+                                                    <div class="product-star">
+                                                        @for (int i = 0; i < @item.Yildiz; i++)
+                                                        {
+                                                            <i class="fa fa-star"></i>
+                                                        }
+
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        }
+                                    }
+
+
+                                </ul>
+                            </div>
+                            <!-- tab product -->
+                            <div class="tab-panel" id="tab-5">
+                                <ul class="product-list owl-carousel" data-dots="false" data-loop="true" data-nav="true" data-margin="0" data-autoplayTimeout="1000" data-autoplayHoverPause="true" data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":4}}'>
+                                    <li>
+                                        <div class="left-block">
+                                            <a href="#">
+                                                <img class="img-responsive" alt="product" src="assets/data/04_nice-dress.jpg" />
+                                            </a>
+                                            <div class="quick-view">
+                                                @if (Session["Uye"] == null)
+                                                {
+
+                                                    //<button><a href="/Uye/UyeGiris" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+
+
+                                                <a title="Add to my wishlist" class="heart favoriekle1" href="/Uye/UyeGiris"></a>
+                                                }
+                                                else
+                                                { 
+                                                <a title="Add to my wishlist" class="heart favoriekle1" href="#"></a>
+                                                }
+                                                <a title="Add to compare" class="compare" href="#"></a>
+                                                <a title="Quick view" class="search" href="#"></a>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a title="Add to Cart" href="#">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                        <div class="right-block">
+                                            <h5 class="product-name"><a href="#">Nice Dress</a></h5>
+                                            <div class="content_price">
+                                                <span class="price product-price">$38,95</span>
+                                                <span class="price old-price">$52,00</span>
+                                            </div>
+                                            <div class="product-star">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half-o"></i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="left-block">
+                                            <a href="#">
+                                                <img class="img-responsive" alt="product" src="assets/data/05_flowers-dress.jpg" />
+                                            </a>
+                                            <div class="quick-view">
+                                                @if (Session["Uye"] == null)
+                                                {
+
+                                                    //<button><a href="/Uye/UyeGiris" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+
+
+                                                <a title="Add to my wishlist" class="heart favoriekle1" href="/Uye/UyeGiris"></a>
+                                                }
+                                                else
+                                                { 
+                                                <a title="Add to my wishlist" class="heart favoriekle1" href="#"></a>
+                                                }
+                                                <a title="Add to compare" class="compare" href="#"></a>
+                                                <a title="Quick view" class="search" href="#"></a>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a title="Add to Cart" href="#">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                        <div class="right-block">
+                                            <h5 class="product-name"><a href="#">Flowers Dress</a></h5>
+                                            <div class="content_price">
+                                                <span class="price product-price">$38,95</span>
+                                                <span class="price old-price">$52,00</span>
+                                            </div>
+                                            <div class="product-star">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half-o"></i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="left-block">
+                                            <a href="#">
+                                                <img class="img-responsive" alt="product" src="assets/data/06_red-dress.jpg" />
+                                            </a>
+                                            <div class="quick-view">
+                                                @if (Session["Uye"] == null)
+                                                {
+
+                                                    //<button><a href="/Uye/UyeGiris" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+
+
+                                                <a title="Add to my wishlist" class="heart favoriekle1" href="/Uye/UyeGiris"></a>
+                                                }
+                                                else
+                                                { 
+                                                <a title="Add to my wishlist" class="heart favoriekle1" href="#"></a>
+                                                }
+                                                <a title="Add to compare" class="compare" href="#"></a>
+                                                <a title="Quick view" class="search" href="#"></a>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a title="Add to Cart" href="#">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                        <div class="right-block">
+                                            <h5 class="product-name"><a href="#">Red Dress</a></h5>
+                                            <div class="content_price">
+                                                <span class="price product-price">$38,95</span>
+                                                <span class="price old-price">$52,00</span>
+                                            </div>
+                                            <div class="product-star">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half-o"></i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="left-block">
+                                            <a href="#">
+                                                <img class="img-responsive" alt="product" src="assets/data/01_blue-dress.jpg" />
+                                            </a>
+                                            <div class="quick-view">
+                                                @if (Session["Uye"] == null)
+                                                {
+
+                                                    //<button><a href="/Uye/UyeGiris" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+
+
+                                                <a title="Add to my wishlist" class="heart favoriekle1" href="/Uye/UyeGiris"></a>
+                                                }
+                                                else
+                                                { 
+                                                <a title="Add to my wishlist" class="heart favoriekle1" href="#"></a>
+                                                }
+                                                <a title="Add to compare" class="compare" href="#"></a>
+                                                <a title="Quick view" class="search" href="#"></a>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a title="Add to Cart" href="#">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                        <div class="right-block">
+                                            <h5 class="product-name"><a href="#">Blue Dress</a></h5>
+                                            <div class="content_price">
+                                                <span class="price product-price">$38,95</span>
+                                                <span class="price old-price">$52,00</span>
+                                            </div>
+                                            <div class="product-star">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half-o"></i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="left-block">
+                                            <a href="#">
+                                                <img class="img-responsive" alt="product" src="assets/data/02_yellow-dress.jpg" />
+                                            </a>
+                                            <div class="quick-view">
+                                                @if (Session["Uye"] == null)
+                                                {
+
+                                                    //<button><a href="/Uye/UyeGiris" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+
+
+                                                <a title="Add to my wishlist" class="heart favoriekle1" href="/Uye/UyeGiris"></a>
+                                                }
+                                                else { 
+                                                <a title="Add to my wishlist" class="heart favoriekle1" href="#"></a>}
+                                                <a title="Add to compare" class="compare" href="#"></a>
+                                                <a title="Quick view" class="search" href="#"></a>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a title="Add to Cart" href="#">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                        <div class="right-block">
+                                            <h5 class="product-name"><a href="#">Yellow Dress</a></h5>
+                                            <div class="content_price">
+                                                <span class="price product-price">$38,95</span>
+                                                <span class="price old-price">$52,00</span>
+                                            </div>
+                                            <div class="product-star">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half-o"></i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="left-block">
+                                            <a href="#">
+                                                <img class="img-responsive" alt="product" src="assets/data/03_cyan-dress.jpg" />
+                                            </a>
+                                            <div class="quick-view">
+                                                @if (Session["Uye"] == null)
+                                                {
+
+                                                    //<button><a href="/Uye/UyeGiris" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+
+
+                                                <a title="Add to my wishlist" class="heart favoriekle1" href="/Uye/UyeGiris"></a>
+                                                }
+                                                else { 
+                                                <a title="Add to my wishlist" class="heart favoriekle1" href="#"></a>}
+                                                <a title="Add to compare" class="compare" href="#"></a>
+                                                <a title="Quick view" class="search" href="#"></a>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a title="Add to Cart" href="#">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                        <div class="right-block">
+                                            <h5 class="product-name"><a href="#">Cyan Dress</a></h5>
+                                            <div class="content_price">
+                                                <span class="price product-price">$38,95</span>
+                                                <span class="price old-price">$52,00</span>
+                                            </div>
+                                            <div class="product-star">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half-o"></i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="left-block">
+                                            <a href="#">
+                                                <img class="img-responsive" alt="product" src="assets/data/04_nice-dress.jpg" />
+                                            </a>
+                                            <div class="quick-view">
+                                                @if (Session["Uye"] == null)
+                                                {
+
+                                                    //<button><a href="/Uye/UyeGiris" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+
+
+                                                <a title="Add to my wishlist" class="heart favoriekle1" href="/Uye/UyeGiris"></a>
+                                                }
+                                                else { 
+                                                <a title="Add to my wishlist" class="heart favoriekle1" href="#"></a>}
+                                                <a title="Add to compare" class="compare" href="#"></a>
+                                                <a title="Quick view" class="search" href="#"></a>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a title="Add to Cart" href="#">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                        <div class="right-block">
+                                            <h5 class="product-name"><a href="#">Nice Dress</a></h5>
+                                            <div class="content_price">
+                                                <span class="price product-price">$38,95</span>
+                                                <span class="price old-price">$52,00</span>
+                                            </div>
+                                            <div class="product-star">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half-o"></i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="left-block">
+                                            <a href="#">
+                                                <img class="img-responsive" alt="product" src="assets/data/05_flowers-dress.jpg" />
+                                            </a>
+                                            <div class="quick-view">
+                                                @if (Session["Uye"] == null)
+                                                {
+
+                                                    //<button><a href="/Uye/UyeGiris" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+
+
+                                                <a title="Add to my wishlist" class="heart favoriekle1" href="/Uye/UyeGiris"></a>
+                                                }
+                                                else { 
+                                                <a title="Add to my wishlist" class="heart favoriekle1" href="#"></a>}
+                                                <a title="Add to compare" class="compare" href="#"></a>
+                                                <a title="Quick view" class="search" href="#"></a>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a title="Add to Cart" href="#">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                        <div class="right-block">
+                                            <h5 class="product-name"><a href="#">Flowers Dress</a></h5>
+                                            <div class="content_price">
+                                                <span class="price product-price">$38,95</span>
+                                                <span class="price old-price">$52,00</span>
+                                            </div>
+                                            <div class="product-star">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half-o"></i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="left-block">
+                                            <a href="#">
+                                                <img class="img-responsive" alt="product" src="assets/data/06_red-dress.jpg" />
+                                            </a>
+                                            <div class="quick-view">
+                                                @if (Session["Uye"] == null)
+                                                {
+
+                                                    //<button><a href="/Uye/UyeGiris" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+
+
+                                                <a title="Add to my wishlist" class="heart favoriekle1" href="/Uye/UyeGiris"></a>
+                                                }
+                                                else { 
+                                                <a title="Add to my wishlist" class="heart favoriekle1" href="#"></a>}
+                                                <a title="Add to compare" class="compare" href="#"></a>
+                                                <a title="Quick view" class="search" href="#"></a>
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a title="Add to Cart" href="#">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                        <div class="right-block">
+                                            <h5 class="product-name"><a href="#">Red Dress</a></h5>
+                                            <div class="content_price">
+                                                <span class="price product-price">$38,95</span>
+                                                <span class="price old-price">$52,00</span>
+                                            </div>
+                                            <div class="product-star">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half-o"></i>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- featured category electronic -->
+            <div class="category-featured">
+                <nav class="navbar nav-menu nav-menu-orange show-brand">
+                    <div class="container">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-brand"><a href="#">Çocuk Ayakkabıları</a></div>
+                        <span class="toggle-menu"></span>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                    </div><!-- /.container-fluid -->
+                    <div id="elevator-3" class="floor-elevator">
+                        <a href="#elevator-2" class="btn-elevator up fa fa-angle-up"></a>
+                        <a href="#elevator-4" class="btn-elevator down fa fa-angle-down"></a>
+                    </div>
+                </nav>
+                <div class="product-featured clearfix">
+
+                    <div class="product-featured-content">
+                        <div class="product-featured-list">
+                            <div class="tab-container">
+                                <!-- tab product -->
+                                <div class="tab-panel active" id="tab-4">
+                                    <ul class="product-list owl-carousel" data-dots="false" data-loop="true" data-nav="true" data-margin="0" data-autoplayTimeout="1000" data-autoplayHoverPause="true" data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":4}}'>
+                                        @{
+                                            var cocukayakkabilari = (List<BitirmeProjem.Entities.Concrete.Urunler>)ViewBag.CocukAyakkabilari;
+                                            foreach (var item in cocukayakkabilari)
+                                            {
+                                                <li>
+                                                    <div class="left-block">
+                                                        <a href="#">
+                                                            <img class="img-responsive" alt="product" src="~/Content/images/Urunler/@item.KapakResmi" />
+                                                        </a>
+                                                        <div class="quick-view">
+                                                            @if (Session["Uye"] == null)
+                                                            {
+
+                                                                //<button><a href="/Uye/UyeGiris" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+
+
+                                                            <a title="Add to my wishlist" class="heart favoriekle1" href="/Uye/UyeGiris"></a>
+                                                            }
+                                                            else { 
+                                                                <a title="Add to my wishlist" data-id="@item.ID" class="heart favoriekle1" href="#"></a>}
+                                                           
+                                                            <a title="Add to compare" class="compare" href="#"></a>
+                                                            <a title="Quick view" class="search" href="#"></a>
+                                                        </div>
+                                                        <div class="add-to-cart">
+                                                            <a title="Add to Cart" href="javascript:void(0)" class="sepet" data-id="@item.ID">Sepete Ekle</a>
+                                                        </div>
+                                                    </div>
+                                                    <btn><a href="/Urunler/UrunDetay/@item.ID" style="height:35px; width:285px; margin-left:2px;" class="btn btn-success">İncele</a></btn>
+                                                    <div class="right-block">
+                                                        <h5 class="product-name"><a href="#">@item.Adi</a></h5>
+                                                        <div class="content_price">
+                                                            <span class="price product-price">@item.Fiyat TL</span>
+                                                        </div>
+                                                        <div class="product-star">
+                                                            @for (int i = 0; i < @item.Yildiz; i++)
+                                                            {
+                                                                <i class="fa fa-star"></i>
+                                                            }
+
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            }
+                                        }
+
+
+                                    </ul>
+                                </div>
+                                <!-- tab product -->
+                                <div class="tab-panel" id="tab-5">
+                                    <ul class="product-list owl-carousel" data-dots="false" data-loop="true" data-nav="true" data-margin="0" data-autoplayTimeout="1000" data-autoplayHoverPause="true" data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":4}}'>
+                                        <li>
+                                            <div class="left-block">
+                                                <a href="#">
+                                                    <img class="img-responsive" alt="product" src="assets/data/04_nice-dress.jpg" />
+                                                </a>
+                                                <div class="quick-view">
+                                                    @if (Session["Uye"] == null)
+                                                    {
+
+                                                        //<button><a href="/Uye/UyeGiris" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+
+
+                                                    <a title="Add to my wishlist" class="heart favoriekle1" href="/Uye/UyeGiris"></a>
+                                                    }
+                                                    else { 
+                                                    <a title="Add to my wishlist" class="heart favoriekle1" href="#"></a>}
+                                                    <a title="Add to compare" class="compare" href="#"></a>
+                                                    <a title="Quick view" class="search" href="#"></a>
+                                                </div>
+                                                <div class="add-to-cart">
+                                                    <a title="Add to Cart" href="#">Add to Cart</a>
+                                                </div>
+                                            </div>
+                                            <div class="right-block">
+                                                <h5 class="product-name"><a href="#">Nice Dress</a></h5>
+                                                <div class="content_price">
+                                                    <span class="price product-price">$38,95</span>
+                                                    <span class="price old-price">$52,00</span>
+                                                </div>
+                                                <div class="product-star">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-half-o"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="left-block">
+                                                <a href="#">
+                                                    <img class="img-responsive" alt="product" src="assets/data/05_flowers-dress.jpg" />
+                                                </a>
+                                                <div class="quick-view">
+                                                    @if (Session["Uye"] == null)
+                                                    {
+
+                                                        //<button><a href="/Uye/UyeGiris" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+
+
+                                                    <a title="Add to my wishlist" class="heart favoriekle1" href="/Uye/UyeGiris"></a>
+                                                    }
+                                                    else { 
+                                                    <a title="Add to my wishlist" class="heart favoriekle1" href="#"></a>}
+                                                    <a title="Add to compare" class="compare" href="#"></a>
+                                                    <a title="Quick view" class="search" href="#"></a>
+                                                </div>
+                                                <div class="add-to-cart">
+                                                    <a title="Add to Cart" href="#">Add to Cart</a>
+                                                </div>
+                                            </div>
+                                            <div class="right-block">
+                                                <h5 class="product-name"><a href="#">Flowers Dress</a></h5>
+                                                <div class="content_price">
+                                                    <span class="price product-price">$38,95</span>
+                                                    <span class="price old-price">$52,00</span>
+                                                </div>
+                                                <div class="product-star">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-half-o"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="left-block">
+                                                <a href="#">
+                                                    <img class="img-responsive" alt="product" src="assets/data/06_red-dress.jpg" />
+                                                </a>
+                                                <div class="quick-view">
+                                                    @if (Session["Uye"] == null)
+                                                    {
+
+                                                        //<button><a href="/Uye/UyeGiris" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+
+
+                                                    <a title="Add to my wishlist" class="heart favoriekle1" href="/Uye/UyeGiris"></a>
+                                                    }
+                                                    else { 
+                                                    <a title="Add to my wishlist" class="heart favoriekle1" href="#"></a>}
+                                                    <a title="Add to compare" class="compare" href="#"></a>
+                                                    <a title="Quick view" class="search" href="#"></a>
+                                                </div>
+                                                <div class="add-to-cart">
+                                                    <a title="Add to Cart" href="#">Add to Cart</a>
+                                                </div>
+                                            </div>
+                                            <div class="right-block">
+                                                <h5 class="product-name"><a href="#">Red Dress</a></h5>
+                                                <div class="content_price">
+                                                    <span class="price product-price">$38,95</span>
+                                                    <span class="price old-price">$52,00</span>
+                                                </div>
+                                                <div class="product-star">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-half-o"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="left-block">
+                                                <a href="#">
+                                                    <img class="img-responsive" alt="product" src="assets/data/01_blue-dress.jpg" />
+                                                </a>
+                                                <div class="quick-view">
+                                                    @if (Session["Uye"] == null)
+                                                    {
+
+                                                        //<button><a href="/Uye/UyeGiris" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+
+
+                                                    <a title="Add to my wishlist" class="heart favoriekle1" href="/Uye/UyeGiris"></a>
+                                                    }
+                                                    else { 
+                                                    <a title="Add to my wishlist" class="heart favoriekle1" href="#"></a>}
+                                                    <a title="Add to compare" class="compare" href="#"></a>
+                                                    <a title="Quick view" class="search" href="#"></a>
+                                                </div>
+                                                <div class="add-to-cart">
+                                                    <a title="Add to Cart" href="#">Add to Cart</a>
+                                                </div>
+                                            </div>
+                                            <div class="right-block">
+                                                <h5 class="product-name"><a href="#">Blue Dress</a></h5>
+                                                <div class="content_price">
+                                                    <span class="price product-price">$38,95</span>
+                                                    <span class="price old-price">$52,00</span>
+                                                </div>
+                                                <div class="product-star">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-half-o"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="left-block">
+                                                <a href="#">
+                                                    <img class="img-responsive" alt="product" src="assets/data/02_yellow-dress.jpg" />
+                                                </a>
+                                                <div class="quick-view">
+                                                    @if (Session["Uye"] == null)
+                                                    {
+
+                                                        //<button><a href="/Uye/UyeGiris" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+
+
+                                                    <a title="Add to my wishlist" class="heart favoriekle1" href="/Uye/UyeGiris"></a>
+                                                    }
+                                                    else { 
+                                                    <a title="Add to my wishlist" class="heart favoriekle1" href="#"></a>}
+                                                    <a title="Add to compare" class="compare" href="#"></a>
+                                                    <a title="Quick view" class="search" href="#"></a>
+                                                </div>
+                                                <div class="add-to-cart">
+                                                    <a title="Add to Cart" href="#">Add to Cart</a>
+                                                </div>
+                                            </div>
+                                            <div class="right-block">
+                                                <h5 class="product-name"><a href="#">Yellow Dress</a></h5>
+                                                <div class="content_price">
+                                                    <span class="price product-price">$38,95</span>
+                                                    <span class="price old-price">$52,00</span>
+                                                </div>
+                                                <div class="product-star">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-half-o"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="left-block">
+                                                <a href="#">
+                                                    <img class="img-responsive" alt="product" src="assets/data/03_cyan-dress.jpg" />
+                                                </a>
+                                                <div class="quick-view">
+                                                    @if (Session["Uye"] == null)
+                                                    {
+
+                                                        //<button><a href="/Uye/UyeGiris" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+
+
+                                                    <a title="Add to my wishlist" class="heart favoriekle1" href="/Uye/UyeGiris"></a>
+                                                    }
+                                                    else { 
+                                                    <a title="Add to my wishlist" class="heart favoriekle1" href="#"></a>}
+                                                    <a title="Add to compare" class="compare" href="#"></a>
+                                                    <a title="Quick view" class="search" href="#"></a>
+                                                </div>
+                                                <div class="add-to-cart">
+                                                    <a title="Add to Cart" href="#">Add to Cart</a>
+                                                </div>
+                                            </div>
+                                            <div class="right-block">
+                                                <h5 class="product-name"><a href="#">Cyan Dress</a></h5>
+                                                <div class="content_price">
+                                                    <span class="price product-price">$38,95</span>
+                                                    <span class="price old-price">$52,00</span>
+                                                </div>
+                                                <div class="product-star">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-half-o"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="left-block">
+                                                <a href="#">
+                                                    <img class="img-responsive" alt="product" src="assets/data/04_nice-dress.jpg" />
+                                                </a>
+                                                <div class="quick-view">
+                                                    @if (Session["Uye"] == null)
+                                                    {
+
+                                                        //<button><a href="/Uye/UyeGiris" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+
+
+                                                    <a title="Add to my wishlist" class="heart favoriekle1" href="/Uye/UyeGiris"></a>
+                                                    }
+                                                    else { 
+                                                    <a title="Add to my wishlist" class="heart favoriekle1" href="#"></a>}
+                                                    <a title="Add to compare" class="compare" href="#"></a>
+                                                    <a title="Quick view" class="search" href="#"></a>
+                                                </div>
+                                                <div class="add-to-cart">
+                                                    <a title="Add to Cart" href="#">Add to Cart</a>
+                                                </div>
+                                            </div>
+                                            <div class="right-block">
+                                                <h5 class="product-name"><a href="#">Nice Dress</a></h5>
+                                                <div class="content_price">
+                                                    <span class="price product-price">$38,95</span>
+                                                    <span class="price old-price">$52,00</span>
+                                                </div>
+                                                <div class="product-star">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-half-o"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="left-block">
+                                                <a href="#">
+                                                    <img class="img-responsive" alt="product" src="assets/data/05_flowers-dress.jpg" />
+                                                </a>
+                                                <div class="quick-view">
+                                                    @if (Session["Uye"] == null)
+                                                    {
+
+                                                        //<button><a href="/Uye/UyeGiris" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+
+
+                                                    <a title="Add to my wishlist" class="heart favoriekle1" href="/Uye/UyeGiris"></a>
+                                                    }
+                                                    else { 
+                                                    <a title="Add to my wishlist" class="heart favoriekle1" href="#"></a>}
+                                                    <a title="Add to compare" class="compare" href="#"></a>
+                                                    <a title="Quick view" class="search" href="#"></a>
+                                                </div>
+                                                <div class="add-to-cart">
+                                                    <a title="Add to Cart" href="#">Add to Cart</a>
+                                                </div>
+                                            </div>
+                                            <div class="right-block">
+                                                <h5 class="product-name"><a href="#">Flowers Dress</a></h5>
+                                                <div class="content_price">
+                                                    <span class="price product-price">$38,95</span>
+                                                    <span class="price old-price">$52,00</span>
+                                                </div>
+                                                <div class="product-star">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-half-o"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="left-block">
+                                                <a href="#">
+                                                    <img class="img-responsive" alt="product" src="assets/data/06_red-dress.jpg" />
+                                                </a>
+                                                <div class="quick-view">
+                                                    @if (Session["Uye"] == null)
+                                                    {
+
+                                                        //<button><a href="/Uye/UyeGiris" style="background:black; color:white;">Kullaniciya Soru Sor</a></button>
+
+
+                                                    <a title="Add to my wishlist" class="heart favoriekle1" href="/Uye/UyeGiris"></a>
+                                                    }
+                                                    else { 
+                                                    <a title="Add to my wishlist" class="heart favoriekle1" href="#"></a>}
+                                                    <a title="Add to compare" class="compare" href="#"></a>
+                                                    <a title="Quick view" class="search" href="#"></a>
+                                                </div>
+                                                <div class="add-to-cart">
+                                                    <a title="Add to Cart" href="#">Add to Cart</a>
+                                                </div>
+                                            </div>
+                                            <div class="right-block">
+                                                <h5 class="product-name"><a href="#">Red Dress</a></h5>
+                                                <div class="content_price">
+                                                    <span class="price product-price">$38,95</span>
+                                                    <span class="price old-price">$52,00</span>
+                                                </div>
+                                                <div class="product-star">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-half-o"></i>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- end featured category electronic-->
+            <!-- featured category Digital -->
+            <!-- end featured category Digital-->
+
+
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $("body").addClass("home");
+    </script>
+<script>
+        $(document).ready(function () {
+            $(".favoriekle1").click(function () {
+               
+                var id = $(this).attr('data-id');
+                $.ajax({
+                    url: '/Home/FavorilereEkle',
+                    type:'POST',
+                    data: { 'id': id },
+                    datatype:'json',
+                    success: function (data) {
+                        alert("basarili bir sekilde eklediniz!")
+                    }
+
+                });
+            });
+        });
+</script>
+}

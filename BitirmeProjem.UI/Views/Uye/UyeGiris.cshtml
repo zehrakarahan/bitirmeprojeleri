@@ -1,0 +1,44 @@
+﻿@model BitirmeProjem.UI.Models.VM.UyeGiris
+<div class="columns-container">
+    <div class="container" id="columns">
+        <!-- breadcrumb -->
+        <div class="breadcrumb clearfix">
+            <a class="home" href="#" title="Anasayfaya Git">Anasayfa</a>
+            <span class="navigation-pipe">&nbsp;</span>
+            <span class="navigation_page">Üyelik</span>
+        </div>
+        <!-- ./breadcrumb -->
+        <!-- page heading-->
+        <h2 class="page-heading">
+            <span class="page-heading-title2">Üyelik İşlemleri</span>
+        </h2>
+        <!-- ../page heading-->
+        <div class="page-content">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="box-authentication">
+                        <h3>Üye Girişi Yap</h3>
+                    @using (Html.BeginForm("UyeGiris", "Uye", FormMethod.Post))
+                    {
+                        <label>E-Posta</label>
+                        @Html.TextBoxFor(x => x.Email, new {@class = "form-control"})
+                        <div>
+                            @Html.ValidationMessageFor(x => x.Email, null, new {@class = "forgot-pass"})
+                        </div>
+                        <label>Şifre</label>
+                        @Html.PasswordFor(x => x.Sifre, new {@class = "form-control"})
+                        <div>
+                            @Html.ValidationMessageFor(x => x.Sifre, null, new {@class = "forgot-pass"})
+                        </div>
+
+                        <p class="forgot-pass">
+                            @Html.DisplayTextFor(x => x.Mesaj)
+                        </p>
+                        <button class="button"><i class="fa fa-lock"></i> Giriş Yap</button>
+                    }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
